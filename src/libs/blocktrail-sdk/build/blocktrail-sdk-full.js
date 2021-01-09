@@ -11625,6 +11625,7 @@ WalletSweeper.prototype.discoverWalletFunds = function(increment, options, cb) {
         async.eachSeries(Object.keys(self.blocktrailPublicKeys), function(keyIndex, done) {
             async.eachSeries(checkChain, function(chain, done) {
                 var i = 0;
+                var j = 0;
                 var hasTransactions = false;
 
                 async.doWhilst(function(done) {
@@ -11674,7 +11675,10 @@ WalletSweeper.prototype.discoverWalletFunds = function(increment, options, cb) {
                                     return q.when(hasTransactions)
                                         .then(function(hasTransactions) {
                                             if (!hasTransactions) {
-                                                return;
+                                              j++;
+                                              return;
+                                            } else {
+                                              j = 0;
                                             }
 
                                             //get the unspent outputs for this batch of addresses
@@ -11756,7 +11760,7 @@ WalletSweeper.prototype.discoverWalletFunds = function(increment, options, cb) {
                     });
                 }, function() {
                     //while
-                    return hasTransactions;
+                    return hasTransactions || j < 5;
                 }, function(err) {
                     //all done
                     if (err) {
