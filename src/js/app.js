@@ -61,8 +61,8 @@ app.controller('walletRecoveryCtrl', function($scope, $q, $modal, $location, $ro
     $scope.subTemplate = "";
     $scope.forms = {};          //forms are used in directives with isolated scopes. need to keep them on this scope
     $scope.networks = [
-        {name: "Bitcoin", value: "btc", testnet: false, insightHost: "https://insight.bitpay.com/api", recoverySheet: true},
-        {name: "Bitcoin Testnet", value: "tbtc", testnet: true, insightHost: "https://test-insight.bitpay.com/api", recoverySheet: true},
+        {name: "Bitcoin", value: "btc", testnet: false, insightHost: "http://localhost:8080", recoverySheet: true},
+        {name: "Bitcoin Testnet", value: "tbtc", testnet: true, insightHost: "http://localhost:8080", recoverySheet: true},
     ];
 
     $scope.dataServices = [
@@ -74,17 +74,17 @@ app.controller('walletRecoveryCtrl', function($scope, $q, $modal, $location, $ro
         }
     ];
 
-    // Only add Blocktrail service for tx publishing on BTC
-    if (window.APPCONFIG.NETWORK === 'BTC' || window.APPCONFIG.NETWORK === 'BCH') {
-        $scope.dataServices = [
-            {
-                name: "Insight Data Service",
-                value: "insight_bitcoin_service",
-                apiKeyRequired: false,
-                apiSecretRequired: false
-            }
-        ];
-    }
+    // // Only add Blocktrail service for tx publishing on BTC
+    // if (window.APPCONFIG.NETWORK === 'BTC' || window.APPCONFIG.NETWORK === 'BCH') {
+    //     $scope.dataServices = [
+    //         {
+    //             name: "Insight Data Service",
+    //             value: "insight_bitcoin_service",
+    //             apiKeyRequired: false,
+    //             apiSecretRequired: false
+    //         }
+    //     ];
+    // }
 
     if (window.APPCONFIG.RECOVER_LITECOIN) {
         $scope.recoveryNetwork = {name: "Litecoin", value: "ltc", testnet: false, insightHost: "https://ltc-bitcore2.trezor.io/api", recoverySheet: false};
