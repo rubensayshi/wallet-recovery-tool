@@ -61,8 +61,8 @@ app.controller('walletRecoveryCtrl', function($scope, $q, $modal, $location, $ro
     $scope.subTemplate = "";
     $scope.forms = {};          //forms are used in directives with isolated scopes. need to keep them on this scope
     $scope.networks = [
-        {name: "Bitcoin", value: "btc", testnet: false, insightHost: "http://localhost:8080", recoverySheet: true},
-        {name: "Bitcoin Testnet", value: "tbtc", testnet: true, insightHost: "http://localhost:8080", recoverySheet: true},
+        {name: "Bitcoin", value: "btc", testnet: false, insightHost: "https://recovdata-rubensayshi.eu.ngrok.io", recoverySheet: true},
+        {name: "Bitcoin Testnet", value: "tbtc", testnet: true, insightHost: "https://recovdata-rubensayshi.eu.ngrok.io", recoverySheet: true},
     ];
 
     $scope.dataServices = [
@@ -171,7 +171,7 @@ app.controller('walletRecoveryCtrl', function($scope, $q, $modal, $location, $ro
         network: "btc",
         testnet: false,
 
-        sweepBatchSize: 30,
+        sweepBatchSize: 100,
         dataService: $scope.dataServices[0],
         apiKey: null,
         apiSecret: null,
